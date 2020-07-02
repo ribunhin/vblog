@@ -1,7 +1,7 @@
 package com.webbleen.shiro;
 
 import cn.hutool.json.JSONUtil;
-import com.webbleen.common.Result;
+import com.webbleen.common.lang.Result;
 import com.webbleen.util.JwtUtils;
 import io.jsonwebtoken.Claims;
 import org.apache.shiro.authc.AuthenticationException;
@@ -31,7 +31,7 @@ public class JwtFilter extends AuthenticatingFilter {
 
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         String jwt = request.getHeader("Authorization");
-        if(StringUtils.isEmpty(jwt)) {
+        if (StringUtils.isEmpty(jwt)) {
             return null;
         }
 
@@ -43,13 +43,12 @@ public class JwtFilter extends AuthenticatingFilter {
 
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         String jwt = request.getHeader("Authorization");
-        if(StringUtils.isEmpty(jwt)) {
+        if (StringUtils.isEmpty(jwt)) {
             return true;
         } else {
-
             // 校验jwt
             Claims claim = jwtUtils.getClaimByToken(jwt);
-            if(claim == null || jwtUtils.isTokenExpired(claim.getExpiration())) {
+            if (claim == null || jwtUtils.isTokenExpired(claim.getExpiration())) {
                 throw new ExpiredCredentialsException("token已失效，请重新登录");
             }
 

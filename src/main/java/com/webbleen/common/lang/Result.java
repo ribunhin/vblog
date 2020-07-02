@@ -1,4 +1,4 @@
-package com.webbleen.common;
+package com.webbleen.common.lang;
 
 import lombok.Data;
 
