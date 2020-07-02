@@ -3,7 +3,7 @@ package com.webbleen.controller;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.webbleen.common.Result;
+import com.webbleen.common.lang.Result;
 import com.webbleen.common.dto.LoginDto;
 import com.webbleen.entity.User;
 import com.webbleen.service.UserService;
