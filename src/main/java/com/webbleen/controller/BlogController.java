@@ -34,7 +34,7 @@ public class BlogController {
 
     @GetMapping("/blogs")
     public Result index(@RequestParam(defaultValue = "1") Integer currentPage) {
-        Page page = new Page(currentPage, 10);
+        Page page = new Page(currentPage, 5);
         IPage pageData = blogService.page(page, new QueryWrapper<Blog>().orderByDesc("created"));
 
         return Result.succ(pageData);
@@ -51,7 +51,7 @@ public class BlogController {
     @RequiresAuthentication
     @PostMapping("/blog/edit")
     public Result edit(@Validated @RequestBody Blog blog) {
-        Blog b = null;
+        Blog b;
         if (blog.getId() != null) {
             b = blogService.getById(blog.getId());
             Assert.isTrue(b.getUserId() == ShiroUtil.getProfile().getId(), "没有权限编辑");
