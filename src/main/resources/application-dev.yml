@@ -1,6 +1,14 @@
 server:
   port: 8089
 
+##日志级别
+logging:
+  level:
+    root: info
+    com:
+      webbleen:
+        mapper: debug
+
 # DataSource Config
 spring:
   datasource:

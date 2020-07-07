@@ -1,6 +1,6 @@
 package com.webbleen.service;
 
-import com.webbleen.entity.User;
+import com.webbleen.entity.Type;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author webbleen
  * @since 2020-07-07
  */
-public interface UserService extends IService<User> {
+public interface TypeService extends IService<Type> {
 
 }

@@ -1,6 +1,8 @@
 package com.webbleen.controller.admin;
 
 import cn.hutool.core.map.MapUtil;
+import cn.hutool.crypto.SecureUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.webbleen.common.dto.LoginDto;
 import com.webbleen.common.lang.Result;
 import com.webbleen.entity.User;
@@ -9,6 +11,7 @@ import com.webbleen.util.JwtUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,9 +30,11 @@ public class LoginController {
     @PostMapping("/login")
     public Result login(@Validated @RequestBody LoginDto loginDto, HttpServletResponse response) {
 
-        User user = userService.checkUser(loginDto.getUsername(), loginDto.getPassword());
-        if (user == null) {
-            return Result.fail("用户名或密码错误！");
+        User user = userService.getOne(new QueryWrapper<User>().eq("username", loginDto.getUsername()));
+        Assert.notNull(user, "用户不存在");
+
+        if (!user.getPassword().equals(SecureUtil.md5(loginDto.getPassword()))) {
+            return Result.fail("密码错误！");
         }
 
         String jwt = jwtUtils.generateToken(user.getId());
