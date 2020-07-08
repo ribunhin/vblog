@@ -55,8 +55,8 @@ public class CodeGenerator {
         dsc.setUrl("jdbc:mysql://localhost:3306/webblog?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC");
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
-        dsc.setUsername("dev_cso_master");
-        dsc.setPassword("S-vE0UTGZGLMNm8vmgSeDdca");
+        dsc.setUsername("webbleen");
+        dsc.setPassword("123456");
         mpg.setDataSource(dsc);
 
         // 包配置
@@ -108,7 +108,7 @@ public class CodeGenerator {
         strategy.setRestControllerStyle(true);
         strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));
         strategy.setControllerMappingHyphenStyle(true);
-        strategy.setTablePrefix("w_");
+        strategy.setTablePrefix("m_");
         mpg.setStrategy(strategy);
         mpg.setTemplateEngine(new FreemarkerTemplateEngine());
         mpg.execute();

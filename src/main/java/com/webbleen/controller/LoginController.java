@@ -1,4 +1,4 @@
-package com.webbleen.controller.admin;
+package com.webbleen.controller;
 
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.crypto.SecureUtil;
@@ -43,6 +43,7 @@ public class LoginController {
         return Result.succ(MapUtil.builder()
                 .put("id", user.getId())
                 .put("username", user.getUsername())
+                .put("nickname", user.getNickname())
                 .put("avatar", user.getAvatar())
                 .put("email", user.getEmail())
                 .map()
