@@ -3,6 +3,8 @@ package com.webbleen.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.time.LocalDateTime;
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -31,6 +33,7 @@ public class Blog implements Serializable {
 
     private String content;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime createTime;
 
     private String firstPicture;
@@ -45,6 +48,7 @@ public class Blog implements Serializable {
 
     private String title;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime updateTime;
 
     private Integer views;

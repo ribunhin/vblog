@@ -4,6 +4,7 @@ package com.webbleen.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.webbleen.common.dto.BlogQueryDto;
 import com.webbleen.common.lang.Result;
 import com.webbleen.entity.Blog;
 import com.webbleen.service.BlogService;
@@ -26,30 +27,29 @@ import java.time.LocalDateTime;
  * @since 2020-07-07
  */
 @RestController
+@RequestMapping("/blog")
 public class BlogController {
 
     @Autowired
     BlogService blogService;
 
-    @GetMapping("/blogs")
+    @GetMapping("/index")
     public Result index(@RequestParam(defaultValue = "1") Integer currentPage) {
         Page page = new Page(currentPage, 10);
-        IPage pageData = blogService.page(page, new QueryWrapper<Blog>().orderByDesc("update_time"));
 
-        return Result.succ(pageData);
+        return Result.succ(blogService.listBlog(page, null));
     }
 
-    @GetMapping("/blogs/{id}")
-    public Result blog(@PathVariable(name = "id") Long id) {
-        Blog blog = blogService.getById(id);
-        Assert.notNull(blog, "该博客不存在");
+    @PostMapping("/search")
+    public Result search(@RequestBody BlogQueryDto queryDto) {
+        Page page = new Page(queryDto.getPage(), 10);
 
-        return Result.succ(blog);
+        return Result.succ(blogService.listBlog(page, queryDto));
     }
 
     @RequiresAuthentication
-    @PostMapping("/admin/blogs/input")
-    public Result edit(@Validated @RequestBody Blog blog) {
+    @PostMapping("/input")
+    public Result input(@Validated @RequestBody Blog blog) {
         Blog b;
         if (blog.getId() != null) {
             b = blogService.getById(blog.getId());
@@ -67,4 +67,11 @@ public class BlogController {
         return Result.succ(null);
     }
 
+    @GetMapping("/{id}")
+    public Result blog(@PathVariable(name = "id") Long id) {
+        Blog blog = blogService.getById(id);
+        Assert.notNull(blog, "该博客不存在");
+
+        return Result.succ(blog);
+    }
 }
