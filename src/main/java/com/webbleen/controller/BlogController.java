@@ -7,7 +7,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.webbleen.common.dto.BlogQueryDto;
 import com.webbleen.common.lang.Result;
 import com.webbleen.entity.Blog;
+import com.webbleen.entity.BlogTags;
 import com.webbleen.service.BlogService;
+import com.webbleen.service.BlogTagsService;
 import com.webbleen.util.ShiroUtil;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.BeanUtils;
@@ -17,6 +19,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * <p>
@@ -32,6 +35,9 @@ public class BlogController {
 
     @Autowired
     BlogService blogService;
+
+    @Autowired
+    BlogTagsService blogTagsService;
 
     @GetMapping("/index")
     public Result index(@RequestParam(defaultValue = "1") Integer currentPage) {
@@ -72,6 +78,7 @@ public class BlogController {
         Blog blog = blogService.getById(id);
         Assert.notNull(blog, "该博客不存在");
 
+        blog.setTagIds((List<Long>)(List)blogTagsService.listObjs(new QueryWrapper<BlogTags>().select("tags_id").eq("blogs_id", id)));
         return Result.succ(blog);
     }
 }
