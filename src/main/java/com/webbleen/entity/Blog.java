@@ -7,9 +7,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,11 +34,14 @@ public class Blog implements Serializable {
 
     private Boolean commentable;
 
+
+    @NotBlank(message = "内容不能为空")
     private String content;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime createTime;
 
+    @NotBlank(message = "首图不能为空")
     private String firstPicture;
 
     private String flag;
@@ -49,6 +52,7 @@ public class Blog implements Serializable {
 
     private Boolean shareStatement;
 
+    @NotBlank(message = "昵称不能为空")
     private String title;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
@@ -60,6 +64,7 @@ public class Blog implements Serializable {
 
     private Long userId;
 
+    @NotBlank(message = "描述不能为空")
     private String description;
 
     @TableField(exist = false)

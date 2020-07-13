@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * <p>
  * 
@@ -24,6 +26,7 @@ public class Tag implements Serializable {
 
     private Long id;
 
+    @NotBlank(message = "标签名称不能为空")
     private String name;
 
 
