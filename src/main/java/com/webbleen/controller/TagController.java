@@ -48,7 +48,11 @@ public class TagController {
             return Result.fail("不能添加重复标签");
         }
 
-        tagService.saveOrUpdate(tag);
+        if (tag.getId() == null) {
+            tagService.save(tag);
+        } else {
+            tagService.updateById(tag);
+        }
 
         return Result.succ(null);
     }

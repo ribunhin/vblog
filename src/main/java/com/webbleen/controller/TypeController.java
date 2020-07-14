@@ -48,7 +48,11 @@ public class TypeController {
             return Result.fail("不能添加重复分类");
         }
 
-        typeService.saveOrUpdate(type);
+        if (type.getId() == null) {
+            typeService.save(type);
+        } else {
+            typeService.updateById(type);
+        }
 
         return Result.succ(null);
     }
