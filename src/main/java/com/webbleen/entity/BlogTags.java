@@ -22,6 +22,11 @@ public class BlogTags implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public BlogTags(Long blogId, Long tagId) {
+        this.blogsId = blogId;
+        this.tagsId = tagId;
+    }
+
     private Long blogsId;
 
     private Long tagsId;

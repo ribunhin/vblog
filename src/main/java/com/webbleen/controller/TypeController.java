@@ -30,7 +30,7 @@ public class TypeController {
     @GetMapping("/index")
     public Result index(@RequestParam(defaultValue = "1") Integer currentPage) {
         Page page = new Page(currentPage, 10);
-        IPage pageData = typeService.page(page);
+        IPage pageData = typeService.page(page, new QueryWrapper<Type>().orderByDesc("id"));
 
         return Result.succ(pageData);
     }

@@ -69,6 +69,9 @@ public class BlogController {
         b.setUpdateTime(LocalDateTime.now());
         BeanUtils.copyProperties(blog, b, "id", "userId", "createTime", "views");
         blogService.saveOrUpdate(b);
+        for (Long tagId : blog.getTagIds()) {
+            //blogTagsService.saveOrUpdate(new BlogTags());
+        }
 
         return Result.succ(null);
     }

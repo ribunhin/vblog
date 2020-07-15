@@ -30,7 +30,7 @@ public class TagController {
     @GetMapping("/index")
     public Result index(@RequestParam(defaultValue = "1") Integer currentPage) {
         Page page = new Page(currentPage, 10);
-        IPage pageData = tagService.page(page);
+        IPage pageData = tagService.page(page, new QueryWrapper<Tag>().orderByDesc("id"));
 
         return Result.succ(pageData);
     }
