@@ -1,14 +1,6 @@
 server:
   port: 8089
 
-##日志级别
-logging:
-  level:
-    root: info
-    com:
-      webbleen:
-        mapper: debug
-
 # DataSource Config
 spring:
   datasource:
@@ -17,15 +9,8 @@ spring:
     username: dev_cso_master
     password: S-vE0UTGZGLMNm8vmgSeDdca
 
-#mybatis:
-mybatis:
-  type-aliases-package: com.webbleen.entity
-  mapper-locations: classpath:mapper/*.xml
-  configuration:
-    map-underscore-to-camel-case: true
-
 #mybatis-plus:
-#  mapper-locations: classpath*:/mapper/**Mapper.xml
+  mapper-locations: classpath*:/mapper/**Mapper.xml
 
 shiro-redis:
   enabled: true
