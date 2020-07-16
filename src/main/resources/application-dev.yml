@@ -1,6 +1,13 @@
 server:
   port: 8089
 
+# log
+logging:
+  level:
+    com:
+      webbleen:
+        mapper: debug
+
 # DataSource Config
 spring:
   datasource:
@@ -8,9 +15,6 @@ spring:
     url: jdbc:mysql://localhost:3306/webblog?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC
     username: dev_cso_master
     password: S-vE0UTGZGLMNm8vmgSeDdca
-
-#mybatis-plus:
-  mapper-locations: classpath*:/mapper/**Mapper.xml
 
 shiro-redis:
   enabled: true
